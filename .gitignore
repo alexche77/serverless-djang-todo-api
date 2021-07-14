@@ -130,3 +130,4 @@ dmypy.json
 zappa_settings.json
 *.json
 app/staticfiles/*
+docker-compose.override.yml
