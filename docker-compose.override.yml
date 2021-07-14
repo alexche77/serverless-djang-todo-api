@@ -3,9 +3,7 @@ x-base: &base
     build:
         context: .    
     volumes: 
-        - ./app:/var/task            
-    env_file:
-        - .env
+        - ./app:/var/task    
 services: 
     app:
         <<: *base        
