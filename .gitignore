@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 zappa_settings.json
 *.json
+app/staticfiles/*
