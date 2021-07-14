@@ -6,16 +6,17 @@ services:
   - docker
 
 env:
-  - DJANGO_SECRET_KEY=testing
-  - DJANGO_DEBUG=True
-  - DJANGO_SUPERUSER_PASSWORD=testing
-  - DJANGO_SUPERUSER_USERNAME=test
-  - DJANGO_SUPERUSER_EMAIL=test@test.com
-  - DJANGO_ALLOWED_HOSTS=localhost
-  - DB_HOST=test_db
-  - DB_NAME=test_app
-  - DB_USER=postgres
-  - DB_PASSWORD=testing
+    global:
+    - DJANGO_SECRET_KEY=testing
+    - DJANGO_DEBUG=True
+    - DJANGO_SUPERUSER_PASSWORD=testing
+    - DJANGO_SUPERUSER_USERNAME=test
+    - DJANGO_SUPERUSER_EMAIL=test@test.com
+    - DJANGO_ALLOWED_HOSTS=localhost
+    - DB_HOST=test_db
+    - DB_NAME=test_app
+    - DB_USER=postgres
+    - DB_PASSWORD=testing
 
 
 before_script: pip install docker-compose
