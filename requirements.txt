@@ -7,6 +7,7 @@ cfn-flip==1.2.3
 charset-normalizer==2.0.1
 click==8.0.1
 Django==3.2.5
+djangorestframework==3.12.4
 durationpy==0.5
 future==0.18.2
 hjson==3.0.2
@@ -31,6 +32,6 @@ tqdm==4.61.2
 troposphere==2.7.0
 urllib3==1.26.6
 Werkzeug==0.16.1
+whitenoise==5.2.0
 wsgi-request-logger==0.4.6
 zappa==0.53.0
-whitenoise==5.2.0

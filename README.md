@@ -56,12 +56,21 @@ This project is setup with Docker and docker-compose. Basically it runs the app 
 
 7. Go to /admin and try to login, it should work.
 
-# About lambci/lambda:build-python3.8
 
-This image is as close as it can to AWS Lambda environment, so, if our code runs well within that container, then it means that it will work on actual AWS Lambda.
+# Testing:
+
+Execute `docker compose exec app sh -c 'python3 manage.py test'`
+
+
+
 
 
 # Deploying with zappa
+
+## About lambci/lambda:build-python3.8
+
+This image is as close as it can to AWS Lambda environment, so, if our code runs well within that container, then it means that it will work on actual AWS Lambda.
+
 
 TODO: Thingking about expanding this guide
 TODO: Add steps to create zappa utility user on AWS console
