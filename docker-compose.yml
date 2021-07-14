@@ -3,7 +3,9 @@ x-base: &base
     build:
         context: .    
     volumes: 
-        - ./app:/var/task    
+        - ./app:/var/task
+    env_file:
+        - .env  
 services: 
     app:
         <<: *base        
@@ -15,13 +17,23 @@ services:
                    python manage.py migrate && 
                    python manage.py runserver 0:8000"
         environment: 
-            - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
-            - DJANGO_DEBUG=${DJANGO_DEBUG}
-            - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
-            - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
-            - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
-            - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
-            - DB_HOST=${DB_HOST}
-            - DB_NAME=${DB_NAME}
-            - DB_USER=${DB_USER}
-            - DB_PASSWORD=${DB_PASSWORD}
+            DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+            DJANGO_DEBUG: ${DJANGO_DEBUG}
+            DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD}
+            DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME}
+            DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL}
+            DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
+            DB_HOST: ${DB_HOST}
+            DB_NAME: ${DB_NAME}
+            DB_USER: ${DB_USER}
+            DB_PASSWORD: ${DB_PASSWORD}
+        depends_on: 
+            - db
+    db:
+        image: postgres:13.3-alpine
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
