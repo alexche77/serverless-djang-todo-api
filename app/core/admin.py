@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 
-from core import models
 
 
 class UserAdmin(BaseUserAdmin):
     ordering = ["id"]
-    list_display = ["email", "name"]
+    list_display = ["email", "username"]
     fieldsets = (
         (
             None,
@@ -20,7 +20,7 @@ class UserAdmin(BaseUserAdmin):
         ),
         (
             _("Personal info"),
-            {"fields": ("name",)},
+            {"fields": ("username",)},
         ),
         (
             _("Permissions"),
@@ -49,4 +49,5 @@ class UserAdmin(BaseUserAdmin):
     )
 
 
-admin.site.register(models.User, UserAdmin)
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)

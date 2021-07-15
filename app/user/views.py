@@ -1,31 +1,19 @@
-from django.contrib.auth import get_user_model
+import logging
+from django.contrib.auth.models import User
 
-from rest_framework import authentication, permissions
-from rest_framework.generics import CreateAPIView,\
-    ListAPIView, RetrieveUpdateAPIView
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.settings import api_settings
+from rest_framework import permissions, viewsets
 
-from user.serializers import UserSerializer, AuthTokenSerializer
+from user.serializers import UserSerializer
+from core.mixins import ResponseGenericViewMixin
 
 
-class UserListView(CreateAPIView, ListAPIView):
-    """Create a new user in the system"""
+logger = logging.getLogger(__name__)
+
+
+class UserViewSet(
+    ResponseGenericViewMixin,
+    viewsets.ModelViewSet
+):
     serializer_class = UserSerializer
-    queryset = get_user_model().objects.all()
-
-
-class CreateTokenView(ObtainAuthToken):
-    serializer_class = AuthTokenSerializer
-    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
-
-
-class ManageUserView(RetrieveUpdateAPIView):
-    """Manage the authenticated user"""
-    serializer_class = UserSerializer
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_object(self):
-        """Retrieve and return the authenticated user"""
-        return self.request.user
+    permission_classes = [permissions.IsAdminUser]
+    queryset = User.objects.all().order_by("-id")
