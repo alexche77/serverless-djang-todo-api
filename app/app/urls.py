@@ -24,5 +24,6 @@ urlpatterns = [
         include('dj_rest_auth.registration.urls'),
         name="registration"
     ),
+    path('api/', include('gallery.urls')),
     path('api/user/', include('user.urls')),
 ]

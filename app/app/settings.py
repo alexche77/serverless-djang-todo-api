@@ -59,6 +59,7 @@ INSTALLED_APPS = [
 
     'core',
     'user',
+    'gallery',
 ]
 
 MIDDLEWARE = [
@@ -171,6 +172,13 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
+# Django Storages
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'test')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'test')
+AWS_S3_ENDPOINT_URL = os.environ.get(
+    'AWS_S3_ENDPOINT_URL', 'http://localstack:4566')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'bucket')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

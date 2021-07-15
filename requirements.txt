@@ -46,3 +46,5 @@ Werkzeug==0.16.1
 whitenoise==5.2.0
 wsgi-request-logger==0.4.6
 zappa==0.53.0
+django-storages==1.11.1
+Pillow==8.3.1
