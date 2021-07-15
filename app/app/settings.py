@@ -161,15 +161,15 @@ WHITENOISE_STATIC_PREFIX = "/static/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_SESSION_LOGIN = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = os.environ.get(
+    'DJANGO_EMAIL_BACKEND',
+    'django.core.mail.backends.console.EmailBackend'
+)
 SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-
-
-SITE_ID = 1
 
 
 REST_FRAMEWORK = {
@@ -223,5 +223,6 @@ LOGGING = {
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'user.serializers.MyselfSerializer',
-    'PASSWORD_CHANGE_SERIALIZER': 'user.serializers.MyPasswordChangeSerializer',
+    'PASSWORD_CHANGE_SERIALIZER':
+        'user.serializers.MyPasswordChangeSerializer',
 }
